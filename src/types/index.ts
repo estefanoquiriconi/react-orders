@@ -1,9 +1,9 @@
-export type MenuItem = {
+export interface MenuItem {
   id: number
   name: string
   price: number
 }
 
-export type OrderItem = MenuItem & {
+export interface OrderItem extends MenuItem {
   quantity: number
 }

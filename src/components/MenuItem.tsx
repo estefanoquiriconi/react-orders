@@ -1,6 +1,6 @@
-import type { MenuItem as MenuItemType } from '../types'
+import { MenuItem as MenuItemType } from '../types'
 
-type MenuItemProps = {
+interface MenuItemProps {
   item: MenuItemType
   addItem: (item: MenuItemType) => void
 }
