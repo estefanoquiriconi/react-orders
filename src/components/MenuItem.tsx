@@ -1,4 +1,4 @@
-import { MenuItem as MenuItemType } from '../types'
+import type { MenuItem as MenuItemType } from '../types'
 
 interface MenuItemProps {
   item: MenuItemType
