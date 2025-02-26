@@ -1,57 +1,58 @@
+import { useReducer } from 'react'
 import { MenuItem } from './components/MenuItem'
 import { OrderContents } from './components/OrderContents'
 import { OrderTotal } from './components/OrderTotal'
 import { TipPercentageForm } from './components/TipPercentageForm'
 import { menuItems } from './data/db'
-import { useOrder } from './hooks/useOrder'
+import { initialState, orderReducer } from './reducers/orderReducer'
 
 function App() {
-  const { order, tip, setTip, addItem, removeItem, placeOrder } = useOrder()
+  const [state, dispatch] = useReducer(orderReducer, initialState)
 
   return (
     <>
-      <header className='bg-teal-400 py-5'>
-        <h1 className='text-center text-4xl font-black'>
+      <header className='bg-teal-500 py-6 shadow-md'>
+        <h1 className='text-center text-5xl font-extrabold text-white'>
           Calculadora de Propinas y Consumos
         </h1>
       </header>
 
-      <main className='max-w-7xl mx-auto py-20 grid md:grid-cols-2'>
-        <div className='p-5'>
-          <h2 className='text-4xl font-black'>Menú</h2>
+      <main className='max-w-5xl mx-auto py-10 grid md:grid-cols-2 gap-6'>
+        <div className='p-6 bg-white rounded-lg shadow-lg'>
+          <h2 className='text-3xl font-bold'>Menú</h2>
 
-          <div className='mt-10 space-y-3'>
-            {menuItems.map(item => (
+          <div className='mt-6 space-y-4'>
+            {menuItems.map((item) => (
               <MenuItem
                 key={item.id}
                 item={item}
-                addItem={addItem}
+                dispatch={dispatch}
               />
             ))}
           </div>
         </div>
 
-        <div className='border border-dashed border-slate-300 p-5 rounded-lg space-y-10'>
-          {order.length ? (
+        <div className='border border-gray-300 p-6 rounded-lg shadow-lg bg-white space-y-6'>
+          {state.orders.length ? (
             <>
               <OrderContents
-                order={order}
-                removeItem={removeItem}
+                orders={state.orders}
+                dispatch={dispatch}
               />
 
               <TipPercentageForm
-                tip={tip}
-                setTip={setTip}
+                tip={state.tip}
+                dispatch={dispatch}
               />
 
               <OrderTotal
-                order={order}
-                tip={tip}
-                placeOrder={placeOrder}
+                orders={state.orders}
+                tip={state.tip}
+                dispatch={dispatch}
               />
             </>
           ) : (
-            <p className='text-center'>La orden está vacía</p>
+            <p className='text-center text-gray-500'>La orden está vacía</p>
           )}
         </div>
       </main>
