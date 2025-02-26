@@ -20,8 +20,8 @@ Este proyecto es una aplicación web desarrollada con React, TypeScript y Vite q
 1. Clona este repositorio
 
    ```bash
-   git clone https://github.com/estefanoquiriconi/react-orders-reducer-ts
-   cd react-orders-reducer-ts
+   git clone https://github.com/estefanoquiriconi/react-orders
+   cd react-orders
    ```
 
 2. Instala las dependencias:
